@@ -16,12 +16,16 @@
 	compatible = "xiaomi,mondrian";
 
 	/*
-	 * Physical DRAM: 12 GiB (swinfo.fingerprint mondrian:12 on the measured
-	 * unit; the K60 also ships as 8 and 16 GiB, so re-read this value on a
-	 * different unit). Must match board.toml [payload] dram_size.
+	 * This unit is the 16 GiB K60. Its DRAM is not one contiguous 16 GiB
+	 * block: the low 2 GiB at 0x80000000 is followed by a hole, and the rest
+	 * sits at 0x800000000 and above (see /proc/iomem). The ADT handoff needs
+	 * exactly one contiguous range, so declare the low 2 GiB window that the
+	 * payload and the kernel actually use.
+	 *
+	 * Must match board.toml [payload] dram_size.
 	 */
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0x0 0x80000000 0x3 0x0>;
+		reg = <0x0 0x80000000 0x0 0x80000000>;
 	};
 };
