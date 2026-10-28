@@ -62,7 +62,7 @@ loader = "firmware"
 title = "UniXNU"
 # Must equal the /memory node of dts/mondrian.dts. 12 GiB: the measured unit reports
 # swinfo.fingerprint mondrian:12. Re-read it on a unit of another size.
-dram_size = "0x300000000"
+dram_size = "0x80000000"
 kernel_args = ["-v", "serial=3"]
 tools = true
 # -1 = no countdown while an input device is present. A positive value silently
